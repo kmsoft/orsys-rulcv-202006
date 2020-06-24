@@ -14,6 +14,7 @@ public class OrdersRepository {
 	private Map<Integer, OrderModel> orders = new HashMap<>();
 
 	public Collection<OrderModel> getOrders() {
+		System.out.println("getOrders" + this);
 		return orders.values();
 	}
 
@@ -22,6 +23,7 @@ public class OrdersRepository {
 	}
 
 	public OrderModel createOrder(OrderModel order) {
+		System.out.println("createOrder " + this);
 		order = new OrderModel(lastId.incrementAndGet(), order);
 		this.orders.put(order.id, order);
 		return order;
