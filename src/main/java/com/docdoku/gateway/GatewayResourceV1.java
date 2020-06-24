@@ -21,6 +21,7 @@ import com.docdoku.products.ProductModel;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @Path("/api/v1")
+@CheckIdentity
 @Produces(MediaType.APPLICATION_JSON)
 public class GatewayResourceV1 {
 
@@ -78,7 +79,6 @@ public class GatewayResourceV1 {
 	}
 
 	private int getUserId() {
-		// TODO: get user id from Authorization header
-		return 1;
+		return ((User) securityContext.getUserPrincipal()).id;
 	}
 }
