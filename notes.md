@@ -6,6 +6,9 @@ Les 7 articles de NGINX sur les microservices, par Chris Richardson (auteur conn
 
 10 bonnes pratiques pour écrire des APIs REST: https://medium.com/@mwaysolutions/10-best-practices-for-better-restful-api-cbe81b06f291
 
+Vidéo d'un exemple de désastre d'utilisation des micro-services: https://www.youtube.com/watch?v=gfh-VCTwMw8
+
+À propos de la gestion des pannes, article sur Hystrix (lib Java de gestion de panne apparue avant MicroProfile): https://github.com/Netflix/Hystrix/wiki
 
 ## Glossaire
 
