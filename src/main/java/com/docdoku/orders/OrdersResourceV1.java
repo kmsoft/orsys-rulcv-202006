@@ -9,7 +9,9 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.core.Response;
+
+import com.docdoku.common.MakeSlow;
+import com.docdoku.common.SimulateNetworkFailure;
 
 @Path("/orders/v1")
 public class OrdersResourceV1 {
@@ -36,6 +38,8 @@ public class OrdersResourceV1 {
 	}
 	
 	@POST
+	@SimulateNetworkFailure
+	@MakeSlow
 	public OrderModel create(OrderModel order) {
 		return this.orders.createOrder(order);
 	}

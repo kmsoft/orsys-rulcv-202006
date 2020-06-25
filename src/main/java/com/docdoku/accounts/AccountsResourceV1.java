@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
+import com.docdoku.common.MakeSlow;
+
 @Path("/accounts/v1")
 public class AccountsResourceV1 {
 
@@ -31,6 +33,7 @@ public class AccountsResourceV1 {
 
 	@GET
 	@Path("{accountId}")
+	@MakeSlow()
 	public AccountModel get(@PathParam("accountId") int accountId) {
 		return getAccountOrFail(accountId);
 	}

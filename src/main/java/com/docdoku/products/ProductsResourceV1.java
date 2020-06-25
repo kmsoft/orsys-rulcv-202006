@@ -10,6 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.docdoku.common.SimulateNetworkFailure;
+
 @Path("/products/v1")
 @Produces(MediaType.APPLICATION_JSON)
 public class ProductsResourceV1 {
@@ -18,6 +20,7 @@ public class ProductsResourceV1 {
 	ProductsRepository products;
 
 	@GET
+	@SimulateNetworkFailure()
 	public Collection<ProductModel> list() {
 		return products.getProducts();
 	}

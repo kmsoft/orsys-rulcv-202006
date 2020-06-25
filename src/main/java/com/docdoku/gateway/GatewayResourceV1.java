@@ -18,6 +18,11 @@ import com.docdoku.accounts.TransactionModel;
 import com.docdoku.orders.OrderModel;
 import com.docdoku.products.ProductModel;
 
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
+import org.eclipse.microprofile.faulttolerance.exceptions.TimeoutException;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @Path("/api/v1")
@@ -41,6 +46,7 @@ public class GatewayResourceV1 {
 
 	@GET
 	@Path("products")
+	@Fallback(fallbackMethod = "listProductsFallback")
 	public Collection<ProductModel> listProducts() {
 		return productsService.list();
 	}
@@ -51,12 +57,16 @@ public class GatewayResourceV1 {
 	
 	@GET
 	@Path("my-account")
+	@Timeout(500)
+	@Retry(retryOn = {TimeoutException.class}, maxRetries = 1)
 	public AccountModel getAccount() {
 		return accountsService.get(getUserId());
 	}
 
 	@POST
 	@Path("orders")
+	@CircuitBreaker(requestVolumeThreshold = 3, failureRatio=0.75, delay = 1000, successThreshold = 2)
+	@Timeout(500)
 	public OrderModel createOrder(OrderModel order) {
 		// Get the product or fail
 		ProductModel product = productsService.get(order.productId);
