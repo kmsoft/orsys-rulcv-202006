@@ -76,7 +76,7 @@ public class DateWriter {
 
 - Compiler le programme pour Java8 (l'image de base que nous utiliserons par la suite fournit une JVM version 8)
 ```sh
-javac --target 8 --source 8 DateWriter.java
+javac -target 8 -source 8 DateWriter.java
 ```
 - Créer un jar à partir de la classe compilée
 ```sh
